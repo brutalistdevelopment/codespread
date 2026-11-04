@@ -1,0 +1,3 @@
+interface:
+  display_name: "CodeSpread"
+  short_description: "Find what makes change expensive in a repository"

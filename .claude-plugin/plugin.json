@@ -1,0 +1,10 @@
+{
+  "name": "codespread",
+  "version": "0.1.0",
+  "description": "Find what makes a codebase expensive to change: where the work of a typical change spreads across the directory tree, from its git history.",
+  "author": { "name": "Daniel Armyr" },
+  "homepage": "https://github.com/ArmyAntSEC/codespread",
+  "repository": "https://github.com/ArmyAntSEC/codespread",
+  "license": "MIT",
+  "keywords": ["coupling", "refactoring", "architecture", "git", "code-quality"]
+}

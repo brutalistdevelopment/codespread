@@ -1,0 +1,14 @@
+{
+  "name": "codespread",
+  "owner": {
+    "name": "Daniel Armyr"
+  },
+  "description": "CodeSpread: where the work of a typical change spreads in a codebase, and what to restructure.",
+  "plugins": [
+    {
+      "name": "codespread",
+      "source": "./",
+      "description": "Find what makes a codebase expensive to change: where the work of a typical change spreads across the directory tree, from its git history."
+    }
+  ]
+}
