@@ -2,7 +2,7 @@
   "mcpServers": {
     "codespread": {
       "command": "npx",
-      "args": ["-y", "codespread@0.1.0", "mcp"]
+      "args": ["-y", "codespread@0.1.1", "mcp"]
     }
   }
 }
