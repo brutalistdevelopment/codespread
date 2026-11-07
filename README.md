@@ -1,6 +1,6 @@
 # CodeSpread
 
-by [Brutalist Development](https://brutalistdevelopment.org)
+by [Brutalist Development](https://codespread.brutalistdevelopment.org)
 
 Code that changes together should live together.
 
