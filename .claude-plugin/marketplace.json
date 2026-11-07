@@ -1,9 +1,9 @@
 {
   "name": "codespread",
   "owner": {
-    "name": "Daniel Armyr"
+    "name": "Brutalist Development"
   },
-  "description": "CodeSpread: where the work of a typical change spreads in a codebase, and what to restructure.",
+  "description": "CodeSpread by Brutalist Development: where the work of a typical change spreads in a codebase, and what to restructure.",
   "plugins": [
     {
       "name": "codespread",

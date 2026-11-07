@@ -1,6 +1,6 @@
 ---
 name: codespread
-description: Find what makes a codebase expensive to change, from its git history - which files keep changing together across the directory tree, and where the work of a typical change spreads. Use when the user asks what makes change expensive or slow, where the coupling is, where to refactor or restructure, whether a folder or module boundary is in the right place, or whether a refactoring paid off. Works on git repositories in TypeScript, JavaScript, Python and Rust.
+description: Find what makes a codebase expensive to change, from its git history - which files keep changing together across the directory tree, and where the work of a typical change spreads. Use when the user asks what makes change expensive or slow, where the coupling is, where to refactor or restructure, whether a folder or module boundary is in the right place, whether a refactoring paid off, or what a branch or the work in progress would do to the codebase before it merges. Works on git repositories in TypeScript, JavaScript, Python and Rust.
 ---
 
 # CodeSpread
@@ -11,10 +11,10 @@ turning them into a refactoring is your job, in the repository's own terms.
 
 ## 1. Find the tool
 
-Use the `snapshot` tool of the `codespread` MCP server when it is connected. Otherwise run `command -v codespread`.
-If neither is there, stop and tell the user how to add it, and do not install it yourself:
+Use the `snapshot` and `pending_change` tools of the `codespread` MCP server when it is connected. Otherwise run
+`command -v codespread`. If neither is there, stop and tell the user how to add it, and do not install it yourself:
 
-- as an MCP server: `claude mcp add codespread -- docker run -i --rm -v "$PWD:/repo:ro" armyantsec/codespread`,
+- as an MCP server: `claude mcp add codespread -- docker run -i --rm -v "$PWD:/repo:ro" brutalistdevelopment/codespread`,
   or `claude mcp add codespread -- npx -y codespread mcp`;
 - as a command: `npm install --global codespread` (Node 24 or later).
 
@@ -72,10 +72,25 @@ a concrete proposal named in the repository's own vocabulary (move, merge, extra
 home). Some Splits are deliberate boundaries, such as frontend and backend changing together for a feature; name
 those as such rather than proposing to remove them.
 
-## 8. After a refactoring
+## 8. Before merging a branch
 
-To see what a refactoring did, take the page of a commit from before it and compare the two: the Spread, and the
-Spread contribution of the Splits and Pairs in question.
+To see what the current branch would do once merged, call `pending_change`, or run:
+
+```bash
+codespread <repository> --pending                     # against main, else master
+codespread <repository> --pending --base origin/main  # another base; in CI the base is often only a remote branch
+```
+
+It takes the branch's work since it left the base, committed or not, as one change on the base's tip, the way a
+squash-merge lands it. Its first lines say how that change moves the repository's Spread and how far it spreads
+against a typical change here; below them is the repository's page with the branch merged. Read
+[INTERPRETING.md](INTERPRETING.md#what-a-branch-does) for what they mean. Use it for a refactoring in progress, and to
+review a branch: a change that spreads further than typical is worth a look at the Splits it crosses, not a verdict.
+
+## 9. After a refactoring
+
+To see what a refactoring already on the main branch did, take the page of a commit from before it and compare the
+two: the Spread, and the Spread contribution of the Splits and Pairs in question.
 
 ```bash
 git -C <repository> worktree add --detach "${TMPDIR:-/tmp}/codespread-before" <commit>

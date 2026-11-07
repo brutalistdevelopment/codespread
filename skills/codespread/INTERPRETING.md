@@ -49,3 +49,26 @@ point at that file as the thing everything else follows.
 On a folder's or file's page, where its crossing work goes outside it. A folder's own Splits only show what happens
 inside it, so when its Crossing is much larger than its Splits, the finding is here: the folder and its main partner
 area change as one, and the boundary between them is in the wrong place or carries a leaking concept.
+
+## What a branch does
+
+`pending_change`, or `--pending`, puts these lines above the page:
+
+```
+What the Pending Change does, against main at 7dcac5f80021
+Spread, whole codebase: 0.2985 -> 0.2998 (+0.0013: +0.0013 from how this Change spreads, +0.0000 from changes to the tree)
+Spread of this Change: 0.40, more spread out than a typical Change here (0.30)
+```
+
+- **Spread, whole codebase**: the repository's Spread before and after the branch merges. One change is one
+  among hundreds, so it moves by thousandths; a widespread sweep such as a rename across the tree moves it by about
+  0.01. The part **from how this Change spreads** is the branch's own work. The part **from changes to the tree**
+  comes from the branch adding, moving or deleting files, which changes how far apart files would sit if they were
+  placed at random.
+- **Spread of this Change**: how far the branch's work spreads, on the same scale as the Spread, next to the
+  repository's Spread for a typical change. This is the clearer verdict: below typical means the work stayed more
+  local than usual.
+
+A branch that touches files in one Part only has no Spread, and a branch with no source changes has nothing to
+measure; the second line says so. Work that spreads further than typical is not wrong by itself: some changes cross a
+boundary on purpose. Open the Splits on the page below to see which boundaries it crossed, and judge those.
