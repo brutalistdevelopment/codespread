@@ -2,13 +2,15 @@
 
 by [Brutalist Development](https://brutalistdevelopment.org)
 
-CodeSpread finds what makes a codebase expensive to change. From a repository's git history it measures how far the
-work of a typical change spreads across the directory tree, compared with random placement, and shows where: the
-folders where co-changing files part ways and the files that keep changing together across distance. It works on git
-repositories in TypeScript, JavaScript, Python and Rust.
+Code that changes together should live together.
 
-This repository holds what connects CodeSpread to your tools. The analysis itself is the `codespread` npm package
-and the `brutalistdevelopment/codespread` Docker image.
+CodeSpread puts a number on that principle. From a repository's git history, it measures how far the files in a typical change are spread across the directory tree, compared with random placement. It quantifies the principles of cohesion and couping that Dave Farley sets out in the book Modern Software Engineering.
+
+The report shows where your code structure works against you: the folders where changes split across boundaries, and the distant files that are coupled in practice. It works on git repositories in TypeScript, JavaScript, Python and Rust.
+
+This repository holds what connects CodeSpread to your tools. The analysis itself is the `codespread` npm package and the `brutalistdevelopment/codespread` Docker image.
+
+CodeSpread is an independent project and is not affiliated with or endorsed by Dave Farley.
 
 ## Claude Code plugin
 
@@ -47,8 +49,7 @@ The analysis reads the full history, so in CI check out with `fetch-depth: 0`.
 
 ## GitHub Action
 
-On every pull request, CodeSpread comments with what merging it would do: how far its work spreads compared with a
-typical change in the repository, and how it moves the Spread. Each run replaces the previous comment, and the job
+On every pull request, CodeSpread comments how the change spreads its work compared with a typical change in the repository, and how it will affect the total Spread. Each run replaces the previous comment, and the job
 summary gets the same report.
 
 ```yaml
