@@ -1,0 +1,50 @@
+name: CodeSpread by Brutalist Development
+description: Shows on every pull request how far its work spreads across the folders, and what merging it does to the Spread.
+author: Brutalist Development
+branding:
+  icon: git-pull-request
+  color: orange
+
+inputs:
+  version:
+    description: The codespread npm package version to run.
+    default: "0.1.2"
+  base:
+    description: The branch the pull request merges into. Defaults to the pull request's base branch.
+    default: ""
+  limit:
+    description: How many entries each list shows. Defaults to 10.
+    default: "10"
+  comment:
+    description: Whether to comment on the pull request; the job summary always gets the report.
+    default: "true"
+  token:
+    description: The token that comments; it needs pull-requests write permission.
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+
+    - name: Analyse the pull request
+      shell: bash
+      env:
+        CODESPREAD_VERSION: ${{ inputs.version }}
+        CODESPREAD_BASE: ${{ inputs.base || github.base_ref }}
+        CODESPREAD_LIMIT: ${{ inputs.limit }}
+      run: |
+        "$GITHUB_ACTION_PATH/action/report.sh" "$RUNNER_TEMP/codespread.md"
+        cat "$RUNNER_TEMP/codespread.md" >> "$GITHUB_STEP_SUMMARY"
+
+    # A pull request from a fork gets a read-only token, so it keeps only the summary.
+    - name: Comment on the pull request
+      if: inputs.comment == 'true' && github.event.pull_request.number
+      continue-on-error: true
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        PULL_REQUEST: ${{ github.event.pull_request.number }}
+      run: '"$GITHUB_ACTION_PATH/action/comment.sh" "$RUNNER_TEMP/codespread.md"'

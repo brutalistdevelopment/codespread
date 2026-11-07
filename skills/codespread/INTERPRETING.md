@@ -6,7 +6,8 @@ about what changes together. Every other number on the page is a share of it, so
 same Snapshot compare directly.
 
 ```
-Snapshot of dadb813bf481, committed 2026-11-03 · Spread 0.61 ± 0.02 · taken in 0.37 s
+Spread 0.61 ± 0.02
+Snapshot of dadb813bf481, committed 2026-11-03 · taken in 0.37 s
 
 (root)
 
@@ -56,7 +57,9 @@ area change as one, and the boundary between them is in the wrong place or carri
 
 ```
 What the Pending Change does, against main at 7dcac5f80021
-Spread, whole codebase: 0.2985 -> 0.2998 (+0.0013: +0.0013 from how this Change spreads, +0.0000 from changes to the tree)
+Spread, whole codebase: 0.2985 -> 0.2998 (+0.0013)
+  +0.0013 from how this Change spreads
+  +0.0000 from changes to the tree
 Spread of this Change: 0.40, more spread out than a typical Change here (0.30)
 ```
 

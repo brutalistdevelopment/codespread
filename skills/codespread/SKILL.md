@@ -22,8 +22,8 @@ Use the `snapshot` and `pending_change` tools of the `codespread` MCP server whe
 
 A Snapshot is of the checkout as it is: the first-parent history of the checked-out commit, each commit one change,
 and the uncommitted work as one more change, the newest. Only the last 1,080 days count. Commits on an unmerged branch
-count one by one; say so if there are many. The page's first line names the commit, says "with uncommitted work" when
-that counted, and gives the Spread with its standard error and how long the analysis took.
+count one by one; say so if there are many. The page's first line gives the Spread with its standard error; the second
+names the commit, says "with uncommitted work" when that counted, and how long the analysis took.
 
 Call `snapshot` without a path, or run:
 
