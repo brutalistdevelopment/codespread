@@ -12,6 +12,36 @@ This repository holds what connects CodeSpread to your tools. The analysis itsel
 
 CodeSpread is an independent project and is not affiliated with or endorsed by Dave Farley.
 
+## GitHub Action
+
+On every pull request, CodeSpread comments how the change spreads its work compared with a typical change in the repository, and how it will affect the total Spread. Each run replaces the previous comment, and the job
+summary gets the same report.
+
+```yaml
+name: CodeSpread
+on: pull_request
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  codespread:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: brutalistdevelopment/codespread@v1
+```
+
+| Input | Default | |
+|---|---|---|
+| `base` | the pull request's base branch | the branch the work merges into |
+| `limit` | `10` | how many entries each list shows |
+| `comment` | `true` | `false` keeps the report in the job summary only |
+| `version` | the release this action was tagged with | the `codespread` package to run |
+
+Pull requests from forks get a read-only token, so they have the job summary but no comment.
+
 ## Claude Code plugin
 
 ```
@@ -46,36 +76,6 @@ docker run --rm -v "$PWD:/repo:ro" brutalistdevelopment/codespread .
 ```
 
 The analysis reads the full history, so in CI check out with `fetch-depth: 0`.
-
-## GitHub Action
-
-On every pull request, CodeSpread comments how the change spreads its work compared with a typical change in the repository, and how it will affect the total Spread. Each run replaces the previous comment, and the job
-summary gets the same report.
-
-```yaml
-name: CodeSpread
-on: pull_request
-permissions:
-  contents: read
-  pull-requests: write
-jobs:
-  codespread:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: brutalistdevelopment/codespread@v1
-```
-
-| Input | Default | |
-|---|---|---|
-| `base` | the pull request's base branch | the branch the work merges into |
-| `limit` | `10` | how many entries each list shows |
-| `comment` | `true` | `false` keeps the report in the job summary only |
-| `version` | the release this action was tagged with | the `codespread` package to run |
-
-Pull requests from forks get a read-only token, so they have the job summary but no comment.
 
 ## Licence
 
