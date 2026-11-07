@@ -12,10 +12,13 @@ if [ "$(git rev-parse --is-shallow-repository)" = true ]; then
   exit 1
 fi
 
-report=$(npx -y "codespread@$CODESPREAD_VERSION" --pending --base "origin/$CODESPREAD_BASE" \
-  --limit "$CODESPREAD_LIMIT")
-effect=${report%%$'\n\n'*}
-page=${report#*$'\n\n'}
+# The report names the base as it is given, so give it the branch's own name rather than origin/<base>.
+git show-ref --quiet --verify "refs/heads/$CODESPREAD_BASE" ||
+  git branch --quiet "$CODESPREAD_BASE" "origin/$CODESPREAD_BASE"
+
+report=$(npx -y "codespread@$CODESPREAD_VERSION" --pending --base "$CODESPREAD_BASE" --limit "$CODESPREAD_LIMIT")
+effect=${report%%$'\n\nSpread '*}
+page="Spread ${report#*$'\n\nSpread '}"
 
 {
   echo '<!-- codespread -->'

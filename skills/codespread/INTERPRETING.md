@@ -56,22 +56,20 @@ area change as one, and the boundary between them is in the wrong place or carri
 `pending_change`, or `--pending`, puts these lines above the page:
 
 ```
-What the Pending Change does, against main at 7dcac5f80021
-Spread, whole codebase: 0.2985 -> 0.2998 (+0.0013)
-  +0.0013 from how this Change spreads
-  +0.0000 from changes to the tree
-Spread of this Change: 0.40, more spread out than a typical Change here (0.30)
+This branch spreads 0.40, more than a typical change here (0.30).
+
+Merged into main (7dcac5f), it changes the Spread by +0.0013, from 0.2985 to 0.2998.
+  +0.0013  from how its work spreads
+  +0.0000  from files it adds, moves or deletes
 ```
 
-- **Spread, whole codebase**: the repository's Spread before and after the branch merges. One change is one
-  among hundreds, so it moves by thousandths; a widespread sweep such as a rename across the tree moves it by about
-  0.01. The part **from how this Change spreads** is the branch's own work. The part **from changes to the tree**
-  comes from the branch adding, moving or deleting files, which changes how far apart files would sit if they were
-  placed at random.
-- **Spread of this Change**: how far the branch's work spreads, on the same scale as the Spread, next to the
-  repository's Spread for a typical change. This is the clearer verdict: below typical means the work stayed more
-  local than usual.
+- **The first line is the verdict**: how far the branch's work spreads, on the same scale as the Spread, next to the
+  repository's Spread for a typical change. Less than typical means the work stayed more local than usual.
+- **Merged into main**: the repository's Spread before and after the branch merges. One change is one among
+  hundreds, so it moves by thousandths; a widespread sweep such as a rename across the tree moves it by about 0.01.
+  The part **from how its work spreads** is the branch's own work. The part **from files it adds, moves or deletes**
+  comes from the branch changing the tree, which changes how far apart files would sit if they were placed at random.
 
-A branch that touches files in one Part only has no Spread, and a branch with no source changes has nothing to
-measure; the second line says so. Work that spreads further than typical is not wrong by itself: some changes cross a
-boundary on purpose. Open the Splits on the page below to see which boundaries it crossed, and judge those.
+A branch that changes only one source file, or none, does not spread; the first line says so. Work that spreads
+further than typical is not wrong by itself: some changes cross a boundary on purpose. Open the Splits on the page
+below to see which boundaries it crossed, and judge those.

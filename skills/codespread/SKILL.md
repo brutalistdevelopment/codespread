@@ -82,8 +82,8 @@ codespread <repository> --pending --base origin/main  # another base; in CI the 
 ```
 
 It takes the branch's work since it left the base, committed or not, as one change on the base's tip, the way a
-squash-merge lands it. Its first lines say how that change moves the repository's Spread and how far it spreads
-against a typical change here; below them is the repository's page with the branch merged. Read
+squash-merge lands it. Its first line says how far that change spreads against a typical change here, the next
+how it moves the repository's Spread; below them is the repository's page with the branch merged. Read
 [INTERPRETING.md](INTERPRETING.md#what-a-branch-does) for what they mean. Use it for a refactoring in progress, and to
 review a branch: a change that spreads further than typical is worth a look at the Splits it crosses, not a verdict.
 

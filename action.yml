@@ -8,7 +8,7 @@ branding:
 inputs:
   version:
     description: The codespread npm package version to run.
-    default: "0.1.2"
+    default: "0.1.3"
   base:
     description: The branch the pull request merges into. Defaults to the pull request's base branch.
     default: ""
